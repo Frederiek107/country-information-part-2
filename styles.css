@@ -3,9 +3,12 @@ body {
 }
 
 #flag {
-    width: 60px;
-    height:40px;
+    width: auto;
+    height: auto;
+    max-width: 60px;
+    max-height: 40px;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 h1 {
@@ -55,10 +58,32 @@ button:hover {
     font-weight: bold;
 }
 
-#name {
+#result-name {
     display: flex;
     flex-direction: row-reverse;
     font-family: Calibri;
     font-size: 30px;
     font-weight: bolder;
 }
+
+#worldmap {
+    height: auto;
+    width: auto;
+    max-width: 900px;
+    max-height: 900px;
+}
+
+#flagmap {
+    height: auto;
+    width: auto;
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: 10px;
+}
+
+#worldmap-item {
+    display: flex;
+    justify-content: start;
+    font-family: Calibri;
+}
+

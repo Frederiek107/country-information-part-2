@@ -15,17 +15,13 @@ async function showDataButton(e) {
 }
 
 function showDataKeyboard(e) {
-    const condition = e.keyCode === 13;
-    if (condition) {
+    if (e.keyCode === 13) {
         showResults();
     }
 }
 
 async function fetchData() {
     const endpoint = await axios.get(returnURL());
-    console.log(endpoint.data[0].name + " is situated in " + endpoint.data[0].subregion + ". " +
-            "It has a population of " + endpoint.data[0].population + " people.");
-    console.log("The capital is " + endpoint.data[0].capital + ".");
     const result = endpoint.data[0].name + " is situated in " + endpoint.data[0].subregion + ". "
             + "It has a population of " + endpoint.data[0].population + " people."
     return result;
@@ -36,14 +32,12 @@ async function fetchCurrencies() {
     let string = "The capital is " + endpoint.data[0].capital + " and you can pay with ";
     const currencies = endpoint.data[0].currencies;
     for (const currency of currencies) {
-        console.log(currency);
         if (currency === currencies[0]) {
             string = string + (currency.name) + "'s.";
         } else if (currency > currencies[0]) {
             string = string + " and " + (currency.name) + "'s."
         }
     }
-    console.log(string);
     return string;
 }
 
@@ -68,7 +62,6 @@ async function fetchLanguages() {
             string = string + " and " + language.name + ".";
         }
     }
-    console.log(string);
     return string;
 }
 
@@ -87,12 +80,11 @@ async function showResults() {
         const country = endpoint.data[0];
         page.textContent = "";
         const result = document.createElement("div");
-        const resultname= document.createElement("div");
-        resultname.setAttribute('id', 'name');
-        result.setAttribute('style', 'white-space: pre;');
-        result.textContent = await fetchData() + "\n" + await fetchCurrencies() + "\n" + await fetchLanguages();
-        resultname.textContent = country.name;
-        resultname.appendChild(await fetchFlag());
+        const resultname = document.createElement("div");
+        resultname.setAttribute("id", "result-name");
+        result.setAttribute("style", "white-space: pre;");
+        result.append (await fetchData(), "\n" , await fetchCurrencies(), "\n", await fetchLanguages());
+        resultname.append(country.name, await fetchFlag());
         page.appendChild(resultname);
         page.style.removeProperty("display");
         page.style.setProperty("display","flex");
