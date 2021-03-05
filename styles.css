@@ -90,6 +90,7 @@ button:hover {
     font-family: Calibri;
 }
 
-#population-${name} {
-
+#link {
+    color: goldenrod;
+    font-family: Calibri;
 }
