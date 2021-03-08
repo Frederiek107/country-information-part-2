@@ -94,3 +94,11 @@ button:hover {
     color: goldenrod;
     font-family: Calibri;
 }
+
+#worldregions {
+    display: flex;
+    justify-content: center;
+    color: goldenrod;
+    font-family: fantasy;
+    font-size: 40px;
+}

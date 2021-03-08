@@ -5,7 +5,6 @@ countries.setAttribute("id", "countries")
 //Returns an array with all countries, sorted by population
 async function sortByPopulation() {
     const API = await axios.get("https://restcountries.eu/rest/v2/all");
-    console.log(API);
     const arrayPopulations=[];
     for (let country of API.data) {
         const {name, flag, population, region} = country;
@@ -57,9 +56,7 @@ showCountries()
 // Shows the population below clicked country.
 async function showPopulation(e) {
     const clickedCountry = e.srcElement.innerText;
-    console.log(clickedCountry);
     const ID="population-"+clickedCountry;
-    console.log(ID);
     const clickedElement = document.getElementById("population-"+clickedCountry);
     clickedElement.style.setProperty("color", "goldenrod");
     if (clickedElement.hasChildNodes()){

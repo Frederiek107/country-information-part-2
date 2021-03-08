@@ -34,9 +34,9 @@ async function fetchCurrencies() {
     let string = "The capital is " + capital + " and you can pay with ";
     for (const currency of currencies) {
         if (currency === currencies[0]) {
-            string = string + currency.name + "'s.";
+            string = string + currency.name + "s.";
         } else if (currency > currencies[0]) {
-            string = string + " and " + currency.name + "'s."
+            string = string + " and " + currency.name + "s."
         }
     }
     return string;
