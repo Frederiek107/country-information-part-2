@@ -102,3 +102,7 @@ button:hover {
     font-family: fantasy;
     font-size: 40px;
 }
+
+#country-item{
+    cursor: pointer;
+}
