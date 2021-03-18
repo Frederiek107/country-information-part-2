@@ -4,9 +4,10 @@ const input = document.getElementById("input");
 input.addEventListener("keyup", showDataKeyboard);
 const page= document.getElementById("mainpage");
 
-function returnURL() {
+async function returnURL() {
     let apiURL = "https://restcountries.eu/rest/v2/name/" + input.value + "?fullText=true";
-    return apiURL;
+    const endpoint = await axios.get(apiURL);
+    return endpoint;
 }
 
 async function showDataButton(e) {
@@ -14,14 +15,14 @@ async function showDataButton(e) {
 }
 
 function showDataKeyboard(e) {
-    if (e.keyCode === 13) {
+    if (e.key === "Enter") {
         showResults();
     }
 }
 
 // Returns a string with the subregion and population
 async function fetchData() {
-    const endpoint = await axios.get(returnURL());
+    const endpoint = await returnURL();
     const {name, subregion, population} = endpoint.data[0];
     const result = name +  " is situated in " + subregion + ". It has a population of " + population.toLocaleString() + " people."
     return result;
@@ -29,14 +30,14 @@ async function fetchData() {
 
 // Returns a string with the capital and currency
 async function fetchCurrencies() {
-    const endpoint = await axios.get(returnURL());
+    const endpoint = await returnURL();
     const {capital, currencies} = endpoint.data[0];
     let string = "The capital is " + capital + " and you can pay with ";
     for (const currency of currencies) {
         if (currency === currencies[0]) {
-            string = string + currency.name + "s.";
+            string+= currency.name + "s.";
         } else if (currency > currencies[0]) {
-            string = string + " and " + currency.name + "s."
+            string+= " and " + currency.name + "s."
         }
     }
     return string;
@@ -44,32 +45,23 @@ async function fetchCurrencies() {
 
 // Returns a string with the language(s)
 async function fetchLanguages() {
-    const endpoint = await axios.get(returnURL());
+    const endpoint = await returnURL();
     const {name, languages} = endpoint.data[0];
+    const language = languages.map(language=> {
+        return language.name;
+        });
     let string = "The people from " + name + " speak ";
-    for (const language of languages) {
-        if (languages.length === 1) {
-            string = string + language.name + ".";
+        if (languages.length === 1){
+            string += languages[0].name + ".";
+        } else {
+            string += language.slice(0, language.length-1).join(", ") + " and " + languages[languages.length - 1].name + ".";
         }
-        if (language === languages[0] && languages.length > 1) {
-            string = string + language.name;
-        }
-        if (language === languages[1] && languages.length === 2) {
-            string = string + " and " + language.name + ".";
-        }
-        if (language !== languages[0] && language !== languages[languages.length-1] && languages.length > 2) {
-            string = string + ", " + language.name;
-        }
-        if (language === languages[languages.length - 1] && languages.length > 2) {
-            string = string + " and " + language.name + ".";
-        }
-    }
     return string;
 }
 
 // Returns an image-element with the flag
 async function fetchFlag() {
-    const endpoint = await axios.get(returnURL());
+    const endpoint = await returnURL();
     const flagItem = document.createElement("img");
     const {flag} = endpoint.data[0];
     flagItem.setAttribute("src", flag);
@@ -80,7 +72,7 @@ async function fetchFlag() {
 // Shows the combined results on the page
 async function showResults() {
     try {
-        const endpoint = await axios.get(returnURL());
+        const endpoint = await returnURL();
         const country = endpoint.data[0];
         page.textContent = "";
         const result = document.createElement("div");

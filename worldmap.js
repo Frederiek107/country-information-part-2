@@ -5,14 +5,11 @@ countries.setAttribute("id", "countries")
 //Returns an array with all countries, sorted by population
 async function sortByPopulation() {
     const API = await axios.get("https://restcountries.eu/rest/v2/all");
-    const arrayPopulations=[];
-    for (let country of API.data) {
+    const arrayPopulations = API.data.map(country => {
         const {name, flag, population, region} = country;
-        arrayPopulations.push({name,flag,population,region});
-    }
-    arrayPopulations.sort((a,b) => {
-        return a.population-b.population;
+        return {name, flag, population, region}
     });
+    arrayPopulations.sort((a,b) => a.population-b.population);
     return arrayPopulations;
 }
 
@@ -24,6 +21,7 @@ async function showCountries() {
             flag.setAttribute("src", country.flag);
             flag.setAttribute("id", "flagmap");
             const newItem = document.createElement("div");
+            newItem.setAttribute("id", "country-item")
             const newItemPopulation = document.createElement("div");
             newItemPopulation.setAttribute("id", "population-"+(country.name));
             newItem.append(flag, country.name);
@@ -53,10 +51,9 @@ async function showCountries() {
 }
 showCountries()
 
-// Shows the population below clicked country.
+// Shows the population below the clicked country.
 async function showPopulation(e) {
     const clickedCountry = e.srcElement.innerText;
-    const ID="population-"+clickedCountry;
     const clickedElement = document.getElementById("population-"+clickedCountry);
     clickedElement.style.setProperty("color", "goldenrod");
     if (clickedElement.hasChildNodes()){
