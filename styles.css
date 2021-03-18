@@ -1,0 +1,104 @@
+body {
+    background-color: #041929;
+}
+
+#flag {
+    width: auto;
+    height: auto;
+    max-width: 60px;
+    max-height: 40px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: goldenrod;
+    font-family: fantasy;
+}
+
+input {
+    border-radius: 17px;
+    height: 20px;
+}
+
+button {
+    width: 75px;
+    height: 30px;
+    border-radius: 17px;
+    color: #041929;
+    font-family: Calibri;
+    font-weight: bold;
+    background-color: goldenrod;
+}
+
+button:hover {
+    color: goldenrod;
+    background-color: darkgreen;
+}
+
+#elements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#error {
+    color: red;
+    font-family: Calibri;
+    font-weight: bold;
+}
+
+#mainpage {
+    color: goldenrod;
+    padding: 5px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    font-family: Calibri;
+    font-weight: bold;
+}
+
+#result-name {
+    display: flex;
+    flex-direction: row-reverse;
+    font-family: Calibri;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+#worldmap {
+    border: goldenrod solid 10px;
+    height: auto;
+    width: auto;
+    max-width: 1100px;
+    max-height: 1100px;
+    margin: 30px;
+    margin-left: 170px;
+}
+
+#flagmap {
+    height: auto;
+    width: auto;
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: 10px;
+}
+
+#countries {
+    column-count: 4;
+    column-gap: 20px;
+    font-family: Calibri;
+}
+
+#link {
+    color: goldenrod;
+    font-family: Calibri;
+}
+
+#worldregions {
+    display: flex;
+    justify-content: center;
+    color: goldenrod;
+    font-family: fantasy;
+    font-size: 40px;
+}
